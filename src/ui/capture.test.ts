@@ -5,8 +5,51 @@ import { blockAt, defaultCycle, offsetOf, type Block } from '@/bot/cycles'
 import { RAYON } from '@/bot/repere'
 import { SHAPE_BY_ID } from '@/bot/skins'
 import { EXPRESSION_BY_ID } from '@/bot/expressions'
-import { ouvreCycle } from './capture'
+import { genereCodeIncrustation, ouvreCycle } from './capture'
 import { DEMI_ECRAN, viewBoxExport } from './export'
+
+/* ------------------------------------------------ genereCodeIncrustation */
+
+describe('genereCodeIncrustation', () => {
+  const SVG_SAMPLE = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-125 -125 250 250"><circle r="50"/></svg>'
+
+  it('wraps the SVG in a div with bloub-emoji class', () => {
+    const code = genereCodeIncrustation(SVG_SAMPLE)
+    expect(code).toContain('class="bloub-emoji"')
+    expect(code).toContain(SVG_SAMPLE.trim())
+  })
+
+  it('uses the default size of 120px when no taille is given', () => {
+    const code = genereCodeIncrustation(SVG_SAMPLE)
+    expect(code).toContain('width:120px')
+    expect(code).toContain('height:120px')
+  })
+
+  it('respects a custom taille parameter', () => {
+    const code = genereCodeIncrustation(SVG_SAMPLE, 64)
+    expect(code).toContain('width:64px')
+    expect(code).toContain('height:64px')
+  })
+
+  it('includes the GitHub attribution comment', () => {
+    const code = genereCodeIncrustation(SVG_SAMPLE)
+    expect(code).toContain('https://github.com/Sauravkumar81')
+  })
+
+  it('uses inline-flex to centre the SVG', () => {
+    const code = genereCodeIncrustation(SVG_SAMPLE)
+    expect(code).toContain('display:inline-flex')
+    expect(code).toContain('align-items:center')
+    expect(code).toContain('justify-content:center')
+  })
+
+  it('strips redundant blank lines from the SVG before wrapping', () => {
+    const svgWithBlanks = SVG_SAMPLE + '\n\n\n'
+    const code = genereCodeIncrustation(svgWithBlanks)
+    // No triple consecutive newline should remain
+    expect(code).not.toMatch(/\n{3,}/)
+  })
+})
 
 /**
  * Le lecteur hors ecran, celui qui rend les images d'un export de montage.

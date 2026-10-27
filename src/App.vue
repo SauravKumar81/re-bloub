@@ -12,6 +12,7 @@ import Timeline from '@/components/Timeline.vue'
 import { nomDeCycle, t } from '@/i18n'
 import {
   copie,
+  copieCode,
   copieTexte,
   cycleVersGif,
   cycleVersMp4,
@@ -705,6 +706,9 @@ async function exporte(id: ActionId, confirme = false) {
         etatExport.value = 'copie'
       } else if (action.mode === 'copieTexte') {
         await copieTexte(markup)
+        etatExport.value = 'copie'
+      } else if (action.mode === 'copieCode') {
+        await copieCode(markup, 120)
         etatExport.value = 'copie'
       } else {
         const fichier =

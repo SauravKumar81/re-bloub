@@ -56,6 +56,7 @@ const en: typeof fr = {
     gifConfirm: 'Download',
     copie: 'Copy image',
     copieSvg: 'Copy SVG',
+    copieCode: 'Copy embed code',
     done: 'Exported',
     copied: 'Copied',
     failed: 'Export failed'

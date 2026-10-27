@@ -60,6 +60,7 @@ const zh: typeof fr = {
     gifConfirm: '下载',
     copie: '复制图片',
     copieSvg: '复制 SVG',
+    copieCode: '复制嵌入代码',
     done: '已导出',
     copied: '已复制',
     failed: '导出失败'

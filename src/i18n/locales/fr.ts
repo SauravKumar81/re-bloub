@@ -79,6 +79,7 @@ export default {
     gifConfirm: 'Télécharger',
     copie: "Copier l'image",
     copieSvg: 'Copier le SVG',
+    copieCode: 'Copier le code HTML',
     done: 'Exporté',
     copied: 'Copié',
     failed: "Échec de l'export"

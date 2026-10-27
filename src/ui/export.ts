@@ -51,10 +51,10 @@ export function viewBoxExport(demi = DEMI_CADRE) {
  */
 export const DEMI_ECRAN = DEMI_VIEWBOX
 
-export type ActionId = 'png' | 'svg' | 'anime' | 'gif' | 'copie' | 'copieSvg'
+export type ActionId = 'png' | 'svg' | 'anime' | 'gif' | 'copie' | 'copieSvg' | 'copieCode'
 
 /** Ce qu'on fait de l'image une fois produite. */
-export type ModeExport = 'telecharge' | 'anime' | 'gif' | 'copieImage' | 'copieTexte'
+export type ModeExport = 'telecharge' | 'anime' | 'gif' | 'copieImage' | 'copieTexte' | 'copieCode'
 
 export interface ActionExport {
   id: ActionId
@@ -202,7 +202,8 @@ export const ACTIONS: ActionExport[] = [
   { id: 'anime', mode: 'anime', taille: DEMI_CADRE * 2, extension: 'svg', suffixe: 'anime' },
   { id: 'gif', mode: 'gif', taille: GIF_TAILLE, extension: 'gif' },
   { id: 'copie', mode: 'copieImage', taille: 1024, extension: 'png' },
-  { id: 'copieSvg', mode: 'copieTexte', taille: DEMI_CADRE * 2, extension: 'svg' }
+  { id: 'copieSvg', mode: 'copieTexte', taille: DEMI_CADRE * 2, extension: 'svg' },
+  { id: 'copieCode', mode: 'copieCode', taille: DEMI_CADRE * 2, extension: 'svg' }
 ]
 
 export const ACTION_BY_ID = new Map<string, ActionExport>(ACTIONS.map((a) => [a.id, a]))

@@ -133,6 +133,31 @@ export async function copieTexte(texte: string) {
   await navigator.clipboard.writeText(texte)
 }
 
+/**
+ * Genere un extrait de code HTML pret a l'emploi qui incrustre le SVG bloub dans
+ * n'importe quel projet. L'extrait contient :
+ *  - un `<style>` inline minimal pour centrer et dimensionner la boule
+ *  - le SVG serialise directement dans le HTML (pas de `<img>` externe)
+ *
+ * Copier-coller ce bloc dans un fichier `.html` ou un composant React / Vue /
+ * Angular affiche la boule sans dependance ni fichier supplementaire.
+ */
+export function genereCodeIncrustation(svgMarkup: string, taille = 120): string {
+  // Retire les retours a la ligne superflus pour un code propre mais pas aplati
+  const svgPropre = svgMarkup.replace(/\n\s*\n/g, '\n').trim()
+  return `<!-- bloub emoji — https://github.com/Sauravkumar81 -->
+<div class="bloub-emoji" style="display:inline-flex;align-items:center;justify-content:center;width:${taille}px;height:${taille}px;">
+${svgPropre}
+</div>`
+}
+
+/**
+ * Copie un extrait HTML « pret a coller dans votre projet » dans le presse-papiers.
+ */
+export async function copieCode(svgMarkup: string, taille?: number) {
+  await navigator.clipboard.writeText(genereCodeIncrustation(svgMarkup, taille))
+}
+
 /** Combien d'images faites sur combien, pour la barre de progression. */
 export type Avancement = (fait: number, total: number) => void
 

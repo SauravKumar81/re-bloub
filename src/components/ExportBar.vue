@@ -139,7 +139,7 @@ onBeforeUnmount(() => window.removeEventListener('pointerdown', onOutside))
         :key="action.id"
         type="button"
         class="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition hover:bg-black/5"
-        :class="action.id === 'copie' && 'mt-1 border-t border-[var(--line)] pt-2.5'"
+        :class="(action.id === 'copie' || action.id === 'copieCode') && 'mt-1 border-t border-[var(--line)] pt-2.5'"
         @click="lance(action.id)"
       >
         <!-- solar:copy-linear -->
@@ -158,6 +158,21 @@ onBeforeUnmount(() => window.removeEventListener('pointerdown', onOutside))
             <path
               d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5"
             />
+          </g>
+        </svg>
+        <!-- solar:code-linear: icone </> pour l'extrait HTML -->
+        <svg
+          v-else-if="action.mode === 'copieCode'"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          class="shrink-0 text-[var(--muted)]"
+        >
+          <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 8L3 12L7 16" />
+            <path d="M17 8L21 12L17 16" />
+            <path d="M14 4L10 20" />
           </g>
         </svg>
         <!-- solar:download-minimalistic-linear — les deux telechargements
